@@ -8,8 +8,8 @@
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "metacubexd",
-      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "手动切换",
+      "external_ui_download_url": "https://gh-proxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "direct",
       "default_mode": "rule"
     },
     "cache_file": {
@@ -42,7 +42,8 @@
       },
       {
         "tag": "dns_resolver",
-        "address": "114.114.114.114"
+        "type": "udp",
+        "server": "114.114.114.114"
       }
     ],
     "rules": [
@@ -86,10 +87,10 @@
       "tag": "tun-in",
       "stack": "system",
       "address": [
-        "172.16.0.1/30",
-        "fd00::1/126"
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
       ],
-      "mtu": 1492,
+      "mtu": 9000,
       "auto_route": true,
       "strict_route": true,
       "sniff": true,
@@ -116,12 +117,6 @@
     }
   ],
   "outbounds": [
-    {
-      "domain_resolver": {
-        "server": "dns_direct",
-        "strategy": "prefer_ipv4"
-      }
-    },
     {
       "type": "urltest",
       "tag": "自动选择",
@@ -221,131 +216,134 @@
     }
   ],
   "route": {
+    "default_domain_resolver": {
+      "server": "dns_resolver"
+    },
     "rule_set": [
       {
         "tag": "geosite-category-ads-all",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ads-all.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ads-all.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-telegram",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/telegram.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/telegram.json",
         "update_interval": "1d"
       },
       {
         "tag": "geoip-telegram",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-youtube",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-netflix",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/netflix.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/netflix.json",
         "update_interval": "1d"
       },
       {
         "tag": "geoip-netflix",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/netflix.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/netflix.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-openai@ads",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/openai@ads.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/openai@ads.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-openai",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/openai.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/openai.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-apple",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-google",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/google.json",
         "update_interval": "1d"
       },
       {
         "tag": "geoip-google",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/google.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-microsoft",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-geolocation-!cn",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-github",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/github.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/github.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-private",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/private.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/private.json",
         "update_interval": "1d"
       },
       {
         "tag": "geosite-cn",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.json",
         "update_interval": "1d"
       },
       {
         "tag": "geoip-private",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/private.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/private.json",
         "update_interval": "1d"
       },
       {
         "tag": "geoip-cn",
         "type": "remote",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
+        "format": "source",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.json",
         "update_interval": "1d"
       }
     ],
